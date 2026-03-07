@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--quiet",
+        "@modelcontextprotocol/server-everything"
+      ]
+    },
+    "local-echo": {
+      "command": "python",
+      "args": [
+        "/opt/mcp-servers/echo_server.py"
+      ]
+    }
+  }
+}
