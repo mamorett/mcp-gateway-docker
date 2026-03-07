@@ -70,7 +70,7 @@ class RobustMCPGateway:
         for name, cfg in config.items():
             params = StdioServerParameters(
                 command=cfg["command"],
-                args=cfg["args"],
+                args=cfg.get("args", []),
                 env={**os.environ, **cfg.get("env", {})}
             )
             self.running_tasks.append(asyncio.create_task(self._manage_child_server(name, params)))
