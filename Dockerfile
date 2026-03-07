@@ -3,9 +3,9 @@ FROM python:3.12-slim-bookworm
 # 1. Installazione UV
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-# 2. Node.js + Network Tools
+# 2. Tool di base + Node.js + GIT (Finalmente!)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl ca-certificates gnupg dnsutils procps net-tools \
+    curl ca-certificates gnupg dnsutils procps net-tools git \
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
@@ -14,11 +14,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Forziamo i log immediati (Niente più "silenzi")
+# Forziamo i log immediati
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Fissiamo solo mcp, lasciamo che uv risolva starlette e uvicorn compatibili!
+# Installazione librerie core del gateway
 RUN uv pip install --system mcp==1.2.1 starlette uvicorn
 
 COPY gateway.py .
