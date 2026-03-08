@@ -19,7 +19,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # Installazione librerie core del gateway
-RUN uv pip install --system mcp==1.2.1 starlette uvicorn
+RUN uv pip install --system mcp==1.2.1 starlette uvicorn yaml oci
 
 COPY gateway.py .
 
