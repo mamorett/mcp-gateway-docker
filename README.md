@@ -8,6 +8,7 @@ A robust, containerized gateway for the [Model Context Protocol (MCP)](https://m
 - **Auto-Reconnection**: Automatically monitors and restarts child processes if they crash or exit.
 - **SSE Transport**: Exposes the unified server interface via HTTP SSE, compatible with modern MCP clients.
 - **Containerized**: Includes a Dockerfile with Python 3.12 and Node.js 20, supporting both Python and Node-based MCP servers out of the box.
+- **Integrated Tools**: Automatically builds and includes [camsnap](https://github.com/steipete/camsnap) in `/usr/local/bin` for camera-related tasks.
 - **Health Monitoring**: Simple `/health` endpoint for orchestration (e.g., Kubernetes liveness probes).
 
 ## Architecture
