@@ -100,7 +100,12 @@ class RobustMCPGateway:
 
             # Chiamiamo il server figlio usando il NOME ORIGINALE del tool
             logger.info(f"📲 Routing: {server_name} -> {original_tool_name}")
-            return await self.sessions[server_name].call_tool(original_tool_name, arguments)
+            result = await self.sessions[server_name].call_tool(original_tool_name, arguments)
+            
+            # Restituiamo il risultato così com'è (CallToolResult)
+            # Se ci sono problemi con le immagini, potrebbe essere dovuto alla serializzazione SSE
+            # o a come il client gestisce il risultato.
+            return result
 
     async def handle_sse(self, request):
         async with self.sse_transport.connect_sse(request.scope, request.receive, request._send) as streams:
